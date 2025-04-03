@@ -40,7 +40,7 @@ const ViewResponses = () => {
         {/* Back Button - Top Left */}
         <button
           onClick={() => navigate(-1)}
-          className="absolute top-4 left-4 flex items-center gap-2 text-gray-700 hover:text-gray-900"
+          className="absolute top-0 md:top-4 left-4 flex items-center gap-2 text-gray-700 hover:text-gray-900"
         >
           <IoArrowBack size={22} />
           <span className="text-lg font-medium">Back</span>
