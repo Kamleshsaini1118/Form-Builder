@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getResponses } from "../services/responseService";
 import { toast } from "react-hot-toast";
-import { IoArrowBack } from "react-icons/io5"; // Back arrow icon
+import { IoArrowBack } from "react-icons/io5"; 
 
 const ViewResponses = () => {
   const { formId } = useParams();

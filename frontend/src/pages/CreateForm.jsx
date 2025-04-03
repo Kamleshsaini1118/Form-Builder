@@ -2,7 +2,7 @@ import { useState } from "react";
 import React from "react";
 import { createForm } from "../services/formService";
 import { useNavigate } from "react-router-dom";
-import { IoArrowBack, IoAddCircle, IoTrash } from "react-icons/io5"; // Icons
+import { IoArrowBack, IoAddCircle, IoTrash } from "react-icons/io5"; 
 
 const fieldTypes = ["text", "email", "number", "checkbox", "radio", "select"];
 

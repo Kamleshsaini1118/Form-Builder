@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { getForms, deleteForm } from "../../services/formService";
 import { toast } from "react-hot-toast";
-import { IoArrowBack } from "react-icons/io5"; // Back arrow icon
+import { IoArrowBack } from "react-icons/io5"; 
 
 const ManageForms = () => {
   const [forms, setForms] = useState([]);
