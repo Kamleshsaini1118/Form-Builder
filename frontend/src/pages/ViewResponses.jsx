@@ -65,12 +65,13 @@ const ViewResponses = () => {
                   Response {idx + 1}
                 </h2>
                 <div className="space-y-3">
-                  {Object.entries(response.answers).map(([key, value], index) => (
-                    <div key={index} className="flex flex-col">
-                      <span className="text-gray-600 font-semibold">{key}:</span>
-                      <span className="text-gray-800">{value}</span>
-                    </div>
-                  ))}
+                {Object.entries(response.answers || {}).map(([key, value], index) => (
+  <div key={index} className="flex flex-col">
+    <span className="text-gray-600 font-semibold">{key}:</span>
+    <span className="text-gray-800">{value}</span>
+  </div>
+))}
+
                 </div>
               </div>
             ))}

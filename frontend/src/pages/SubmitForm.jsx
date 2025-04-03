@@ -10,20 +10,19 @@ const SubmitForm = () => {
   const navigate = useNavigate();
   const [form, setForm] = useState(null);
   const [responses, setResponses] = useState({});
+  const [submittedResponse, setSubmittedResponse] = useState(null); // ✅ Show response after submit
   const [loading, setLoading] = useState(true);
 
-  // ✅ Fetch form details
   useEffect(() => {
     const fetchForm = async () => {
       try {
         const data = await getFormById(formId);
         setForm(data);
 
-        // 🛠 Properly Initialize Responses
         if (data?.fields) {
           const initialResponses = {};
           data.fields.forEach((field) => {
-            initialResponses[field._id] = ""; // Correct field ID
+            initialResponses[field._id] = "";
           });
           setResponses(initialResponses);
         }
@@ -38,29 +37,26 @@ const SubmitForm = () => {
     fetchForm();
   }, [formId]);
 
-  // ✅ Handle input changes correctly
   const handleChange = (e) => {
     const { name, value } = e.target;
     setResponses((prevResponses) => ({
       ...prevResponses,
-      [name]: value, // Update only the targeted field
+      [name]: value,
     }));
   };
 
-  // ✅ Submit user response
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Check if all required fields are filled
     if (Object.values(responses).some((value) => value.trim() === "")) {
       toast.error("Please fill all required fields.");
       return;
     }
 
     try {
-      await submitResponse(formId, responses);
+      const savedResponse = await submitResponse(formId, responses);
       toast.success("Form submitted successfully!");
-      navigate(-1); // Redirect back after submission
+      setSubmittedResponse(savedResponse); // ✅ Save response to state
     } catch (err) {
       console.error("Error submitting response:", err);
       toast.error("Failed to submit form.");
@@ -93,7 +89,7 @@ const SubmitForm = () => {
               <label className="font-medium text-gray-700">{field.label}</label>
               <input
                 type={field.type}
-                name={field._id} // ✅ Unique name for each field
+                name={field._id}
                 value={responses[field._id] || ""}
                 onChange={handleChange}
                 className="px-3 py-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-300 outline-none"
@@ -111,6 +107,23 @@ const SubmitForm = () => {
           </button>
         </form>
       </div>
+
+      {/* ✅ Show Response Below After Submission */}
+      {submittedResponse && (
+        <div className="mt-6 w-full max-w-md bg-green-100 border border-green-500 rounded-lg p-4 shadow-md">
+          <h2 className="text-xl font-semibold text-green-800">Response Submitted:</h2>
+          <ul className="mt-2 text-gray-700">
+            {Object.entries(submittedResponse).map(([fieldId, value]) => {
+              const fieldLabel = form?.fields?.find((f) => f._id === fieldId)?.label || "Unknown Field";
+              return (
+                <li key={fieldId} className="py-1">
+                  <strong>{fieldLabel}:</strong> {value}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      )}
     </div>
   );
 };
