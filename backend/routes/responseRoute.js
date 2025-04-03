@@ -4,9 +4,9 @@ const { createResponse, getResponses, getResponsesByFormId, deleteResponse } = r
 const router = express.Router();
 
 // Define Routes
-router.post("/", createResponse);              // Submit a response
-router.get("/", getResponses);                 // Get all responses
-router.get("/:formId", getResponsesByFormId);  // Get responses by form ID
-router.delete("/:id", deleteResponse);         // Delete a response
+router.post("/", createResponse);              
+router.get("/", getResponses);                 
+router.get("/:formId", getResponsesByFormId);  
+router.delete("/:id", deleteResponse);         
 
 module.exports = router;
