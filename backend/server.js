@@ -17,9 +17,6 @@ mongoose.connect('mongodb+srv://form:QhEkNLCkewZ1lK0Z@cluster1.b2ik1.mongodb.net
     console.log('Connected to DB');
 }).catch(err => console.error("MongoDB connection error:", err));
 
-// models
-const form = require("./models/formModel");
-const response = require("./models/responseModel");
 
 // routes
 app.use("/api/forms", formRoute); // yeh form-route
